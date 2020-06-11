@@ -1,16 +1,16 @@
-"use strict";
+'use strict';
 
-const bcrypt = require("bcryptjs");
+const bcrypt = require('bcryptjs');
 
 function generatePassword(password) {
-  let salt = bcrypt.genSaltSync(10);
-  let hash = bcrypt.hashSync(password, salt);
-  return hash;
+    let salt = bcrypt.genSaltSync(10);
+    let hash = bcrypt.hashSync(password, salt);
+    return hash;
 }
 function checkPassword(password, hash) {
-  return bcrypt.compareSync(password, hash);
+    return bcrypt.compareSync(password, hash);
 }
 module.exports = {
-  generatePassword,
-  checkPassword,
+    generatePassword,
+    checkPassword,
 };

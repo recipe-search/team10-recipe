@@ -5,31 +5,32 @@ let baseUrl = 'http://localhost:3000';
 let idTemporary = '';
 
 $(document).ready(function () {
-    event.preventDefault();
-
     auth();
-    $('.signin-form').submit(function (event) {
-        $.ajax({
-            method: 'post',
-            url: baseUrl + '/users/login',
-            data: {
-                email: $('#email-signin').val(),
-                password: $('#password-signin').val(),
-            },
-        })
-            .done((data) => {
-                localStorage.setItem('token', data.token);
-                auth();
-            })
-            .fail((err) => {
-                console.log(err.responseJSON.message, '-error');
-            })
-            .always((_) => {
-                $('#email-signin').val('');
-                $('#password-signin').val('');
-            });
-    });
 });
+
+const signin = (event) => {
+    event.preventDefault();
+    $.ajax({
+        method: 'post',
+        url: baseUrl + '/users/login',
+        data: {
+            email: $('#email-signin').val(),
+            password: $('#password-signin').val(),
+        },
+    })
+        .done((data) => {
+            console.log(data);
+            localStorage.setItem('token', data.token);
+            auth();
+        })
+        .fail((err) => {
+            console.log(err);
+        })
+        .always((_) => {
+            $('#email-signin').val('');
+            $('#password-signin').val('');
+        });
+};
 
 function auth() {
     if (localStorage.token) {
@@ -37,11 +38,13 @@ function auth() {
         $('#signup-success').hide();
         $('#signin-page').hide();
         $('#main-page').show();
+        $('#dashboard').show();
     } else {
         $('#signup-page').hide();
         $('#signup-success').hide();
         $('#signin-page').show();
         $('#main-page').hide();
+        $('#dashboard').hide();
     }
 }
 
