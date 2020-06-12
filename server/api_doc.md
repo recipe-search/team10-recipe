@@ -240,7 +240,6 @@ _Example:_
 
 | Field   |  Type  | Constraint   | Required |
 | :------ | :----: | :----------- | :------: |
-| to      | String | email format |   True   |
 | subject | String | -            |   True   |
 | message | String | -            |   True   |
 
