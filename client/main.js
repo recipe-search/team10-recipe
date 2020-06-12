@@ -134,7 +134,7 @@ const recipeTemplate = (recipe) => {
                             (recipe.ingredients.join(', ').length > 200 ? '...' : '')
                         }
                         <br/>
-                        <a href="${recipe.url}">See More</a>
+                        <a href="${recipe.url}" target="_blank">See More</a>
                 </p>
                 <div style="text-align: right;">
                     <a onclick="getPDF('${recipe.url}')" href="#" class="btn btn-primary btn-sm">PDF</a>
@@ -197,6 +197,8 @@ const searchRecipeByKeyword = (keyword) => {
 };
 
 const sendMail = (id) => {
+    success('Sending recipe to your email...')
+
     let html = `<img src="${recipes[id].image}" height="250">`;
     html += `<p><b>${recipes[id].title}</b></p>`;
     html += `<ul>`;
@@ -217,11 +219,49 @@ const sendMail = (id) => {
             message: html,
         },
     })
-        .done((data) => console.log(data))
+        .done((data) => {
+            console.log(data);
+            success('Recipe sent successfully to your mail!')
+        })
         .fail((err) => console.log(err));
 };
 
 const getPDF = (url) => {
+    success('Please wait for a moment, we are generating PDF file...')
     console.log(url);
     GrabzIt('NjZmOTFlNjRjNGE3NDI5N2FjN2UyNzhiNGU2ZWYwNjY=').ConvertURL(url, { format: 'pdf', download: 1 }).Create();
+};
+
+const success = (message) => {
+    $('#container-alerts').empty();
+    $('#container-alerts').append(`
+    <div class="alert alert-success alert-dismissible fade show" role="alert">${message}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    `);
+};
+
+const danger = (message) => {
+    $('#container-alerts').empty();
+    if (Array.isArray(message)) {
+        for (let i = 0; i < message.length; i++) {
+            $('#container-alerts').append(`
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">${message[i]}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            `);
+        }
+    } else {
+        $('#container-alerts').append(`
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">${message}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        `);
+    }
 };
