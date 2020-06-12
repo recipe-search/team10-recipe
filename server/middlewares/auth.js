@@ -8,12 +8,13 @@ const authentication = (req, res, next) => {
 
   try {
     let decoded = verifyToken(token);
-    let { id } = decoded;
+    let { id , email } = decoded;
 
     User.findByPk(id)
       .then((result) => {
         if (result) {
           req.currentUserId = id;
+          req.currentUserEmail= email;
           next();
         } else {
           throw {
