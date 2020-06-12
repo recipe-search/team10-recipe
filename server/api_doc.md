@@ -248,7 +248,6 @@ _Example:_
 
 ```json
 {
-    "to": "user@example.com",
     "subject": "Email Subject",
     "message": "Hi there!"
 }
