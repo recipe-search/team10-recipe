@@ -17,10 +17,7 @@ const authentication = (req, res, next) => {
                     req.currentUserEmail = email;
                     next();
                 } else {
-                    throw {
-                        msg: 'Please login first',
-                        code: 401,
-                    };
+                    next({ name: 'LOGIN_FAIL' });
                 }
             })
             .catch((err) => {
