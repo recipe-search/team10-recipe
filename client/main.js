@@ -39,6 +39,9 @@ function auth() {
         $('#signin-page').hide();
         $('#main-page').show();
         $('#dashboard').show();
+        const default_keyword = 'fried chicken';
+        $('#container-search-form #keyword').val(default_keyword);
+        searchRecipeByKeyword(default_keyword);
     } else {
         $('#signup-page').hide();
         $('#signup-success').hide();
@@ -149,6 +152,29 @@ const searchRecipe = (event) => {
     event.preventDefault();
     $('#container-search-form #btn-search').addClass('disabled');
     const keyword = $('#container-search-form #keyword').val();
+    $.ajax({
+        method: 'GET',
+        url: 'https://api.edamam.com/search?app_id=cffd9758&app_key=95042006bd05d4e725667accb5ddc84d&q=' + keyword,
+    })
+        .done((data) => {
+            console.log(data.hits);
+            if (data.hits) {
+                recipes = objToRecipes(data.hits);
+                console.log(recipes);
+                $('#container-recipes').empty();
+                for (let i = 0; i < recipes.length; i++) {
+                    $('#container-recipes').append(recipeTemplate(recipes[i]));
+                }
+            } else {
+                console.log('Recipe dengan keyword ini tidak ditemukan!');
+            }
+        })
+        .fail((err) => console.log(err))
+        .always(() => $('#container-search-form #btn-search').removeClass('disabled'));
+};
+
+const searchRecipeByKeyword = (keyword) => {
+    $('#container-search-form #btn-search').addClass('disabled');
     $.ajax({
         method: 'GET',
         url: 'https://api.edamam.com/search?app_id=cffd9758&app_key=95042006bd05d4e725667accb5ddc84d&q=' + keyword,
