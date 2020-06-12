@@ -16,7 +16,7 @@ let sendGrid = (event) =>{
     let message=$('#message').val()
     $.ajax({
         type: "POST",
-        url: baseUrl,
+        url: baseUrl +"/emails",
         data: {email,message}
       })
       .done(data =>{
