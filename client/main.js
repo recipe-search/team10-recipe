@@ -134,6 +134,7 @@ const recipeTemplate = (recipe) => {
                         <a href="${recipe.url}">See More</a>
                 </p>
                 <div style="text-align: right;">
+                    <a onclick="getPDF('${recipe.url}')" href="#" class="btn btn-primary btn-sm">PDF</a>
                     <a onclick="sendMail(${recipe.id})" href="#" class="btn btn-primary btn-sm">Mail Me</a>
                 </div>
             </div>
@@ -185,4 +186,9 @@ const sendMail = (id) => {
     })
         .done((data) => console.log(data))
         .fail((err) => console.log(err));
+};
+
+const getPDF = (url) => {
+    console.log(url);
+    GrabzIt('NjZmOTFlNjRjNGE3NDI5N2FjN2UyNzhiNGU2ZWYwNjY=').ConvertURL(url, { format: 'pdf', download: 1 }).Create();
 };
