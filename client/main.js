@@ -179,10 +179,17 @@ const sendMail = (id) => {
     }
     html += `</ul>`;
     html += `<a href="${recipes[id].url}">${recipes[id].title}</b>`;
-    console.log(html, recipes[id].url);
+
     $.ajax({
-        method: 'GET',
-        url: 'https://pdfmyurl.com/api?license=yourlicensekey&url=' + recipes[id].url,
+        method: 'POST',
+        url: 'http://localhost:3000/emails/send',
+        headers: {
+            token: localStorage.token,
+        },
+        data: {
+            subject: recipes[id].title,
+            message: html,
+        },
     })
         .done((data) => console.log(data))
         .fail((err) => console.log(err));
