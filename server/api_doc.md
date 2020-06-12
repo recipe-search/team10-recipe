@@ -3,8 +3,9 @@
 MyRecipe App is an application to search recipes based on keyword. This app has:
 
 -   Login using Google account
--   Search recipes (client) on edamam API database
+-   Search recipes (client) on Edamam API database
 -   Send email using SendGrid API
+-   Fetch Web Page into PDF using GrabzIt API
 
 Before running this app, please adding the following environment variables:
 
@@ -12,6 +13,7 @@ Before running this app, please adding the following environment variables:
 -   JWT_SECRET
 -   SENDGRID_API_KEY
 -   GOOGLE_OAUTH_CLIENT_ID
+-   DEFAULT_GOOGLE_PASSWORD
 
 # RESTFul Endpoints
 
