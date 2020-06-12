@@ -1,0 +1,21 @@
+* {   
+    padding: 0;
+    margin: 0;
+    /* font-family: 'Slabo 27px'; */
+}
+
+.title{
+    color: wheat;
+}
+
+.signin-form{
+    padding: 100px 500px 0 500px;
+}
+
+.signup-form{
+    padding: 100px 500px 0 500px;
+}
+
+.nav-link{
+    background-color: transparent;
+}
