@@ -117,8 +117,8 @@ _Example:_
 
 ```json
 {
-    "email": "user@example.com",
-    "password": "password
+    "id": 1,
+    "email": "user@example.com"
 }
 ```
 
@@ -240,10 +240,10 @@ _Example:_
 
 #### Request Body
 
-| Field   |  Type  | Constraint   | Required |
-| :------ | :----: | :----------- | :------: |
-| subject | String | -            |   True   |
-| message | String | -            |   True   |
+| Field   |  Type  | Constraint | Required |
+| :------ | :----: | :--------- | :------: |
+| subject | String | -          |   True   |
+| message | String | -          |   True   |
 
 _Example:_
 
